@@ -1,0 +1,15 @@
+{
+  "name": "api-nodejs-redis",
+  "version": "1.0.0",
+  "description": "api with javascript nodejs docker and redis",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Facundo Iglesias",
+  "license": "MIT",
+  "devDependencies": {
+    "express": "4.17.3",
+    "redis": "4.0.4"
+  }
+}

@@ -1,0 +1,34 @@
+version: "3"
+services:
+  backend:
+    build: ./back
+    container_name: "flask_backend"
+    command: sh -c "pip3 install -r requirements.txt ; python3 app.py"
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./back:/back
+    depends_on:
+      - "flask-redis-db"
+
+  flask-redis-db:
+    container_name: "flask_db"
+    image: redis
+    ports:
+      - "6379:6379"
+
+  frontend:
+    build: ./front
+    container_name: "flask_frontend"
+    command: sh -c 'npm install; npm start'
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./front:/front
+    depends_on:
+      - "backend"
+    stdin_open: true
+    tty: true
+    environment:
+      - NODE_ENV=development
+      - CHOKIDAR_USEPOLLING=true
